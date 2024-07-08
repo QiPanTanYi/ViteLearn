@@ -10,8 +10,11 @@
                 <!-- <Tabs /> -->
                 <!-- <SearchBox /> -->
                 <Test />
-            </main>
+                <!-- <CardEffects /> -->
+                <FullCardtwo />
 
+            </main>
+ 
             <aside class="w-32 bg-blue-100 p-4">Side-搜索记录</aside>
             <div class="absolute left-5 bottom-8 h-40 w-40 rounded">
                 <LogoGroup />
@@ -34,7 +37,10 @@ import LogoGroup from '@/components/home/LogoGroup.vue';
 import Tabs from '@/components/home/Tabs.vue';
 import SearchBox from '@/components/home/SearchBox.vue';
 import Test from '@/components/home/Test.vue';
+import CardEffects from '@/components/home/card/CardEffects.vue';
+import FullCardtwo from '@/components/home/card/FullCardtwo.vue';
 </script>
+
 <style lang="css" scoped>
 @tailwind base;
 @tailwind components;

@@ -6,7 +6,10 @@
     </header>
     <div class="flex flex-1 flex-row">
       <main class="flex-1 ">
-        <SearchBox />Content
+        <SearchBox />
+        <!-- <CardEffects />Content -->
+        <FullCard />
+        cointain
       </main>
       <nav class="order-first w-60 ">Navigation</nav>
       <aside class="w-32 p-4">Side-搜索记录</aside>
@@ -20,6 +23,7 @@
     <footer class=" p-4 h-10">
       <Footer />
     </footer>
+    
   </div>
 </template>
 
@@ -29,7 +33,8 @@ import Footer from '@/components/home/Footer.vue';
 import SlideOver from '@/components/home/SlideOver.vue';
 import LogoGroup from '@/components/home/LogoGroup.vue';
 import SearchBox from '@/components/home/SearchBox.vue';
-
+import CardEffects from '../components/home/card/CardEffects.vue'
+import FullCard from '@/components/home/card/FullCard.vue';
 </script>
 <style lang="css" scoped>
 @tailwind base;
