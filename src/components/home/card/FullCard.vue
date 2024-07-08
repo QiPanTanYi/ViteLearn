@@ -1,12 +1,13 @@
 <template>
-  <div class="wrapper">
+   <div :class="['wrapper', { 'wrapper--expanded': isWrapperExpanded }]">
     <!-- 使用v-for指令来循环渲染4个卡片 -->
     <div class="book" 
          v-for="(book, index) in books" 
          :key="index" 
          :class="{ 'book--expanded': expandedIndex === index }" 
          @click="toggleBook(index)"
-         v-show="expandedIndex === index || !expandedIndex">
+         v-show="expandedIndex === index || showAllCards">
+
       <div class="book__cover">
         <div class="header-image">
           <div class="overlay"></div>
@@ -21,49 +22,83 @@
       </div>
       <div class="book__content">
         <!-- 这里可以添加更多内容 -->
+         <p>
+          <span class="drop-cap">O</span>Lorem ipsum dolor sit amet,
+          consectetur adipisicing elit. Molestias est incidunt odit ea
+          adipisci animi nihil voluptates iure beatae explicabo asperiores
+          enim ex placeat itaque minus error temporibus voluptate corporis
+          suscipit commodi voluptatibus praesentium molestiae, perspiciatis
+          nulla. Accusantium harum nisi maiores, velit perferendis, nesciunt
+          ad, porro sequi aliquid maxime molestias!
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab nobis
+          fuga delectus tempore. Odio ipsa voluptate ex nobis ratione
+          consequatur dignissimos dolorum culpa, ipsam sit dolorem itaque
+          excepturi, natus sed deleniti incidunt ipsum asperiores! Molestiae
+          cumque quam nulla, nam inventore. Necessitatibus blanditiis cumque
+          laboriosam, id, ad unde quo ipsum nulla.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum
+          accusantium velit expedita, minima sapiente unde magnam dicta.
+          Consequuntur cumque numquam sed deserunt, quidem officia illo
+          blanditiis ipsum, commodi distinctio quam molestias dolore,
+          doloremque corporis? Rem ad recusandae delectus accusamus, harum
+          quisquam perferendis dolor aut consectetur nesciunt atque laborum ab
+          dolores.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, neque,
+          magnam. Impedit deleniti ad alias, unde vero quis mollitia, tenetur
+          minima porro, officia iusto quae harum labore nostrum aliquid aut
+          maxime, architecto in reprehenderit. Doloribus pariatur quam fuga
+          sed modi veniam, vel corporis magnam quis eius cumque voluptate,
+          dolore repellendus labore nobis, voluptatibus dicta sapiente
+          doloremque! Enim dicta totam debitis cumque similique, natus,
+          consequatur quidem cum incidunt, sint quos. Ea.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident
+          voluptatum possimus dolores nesciunt natus quaerat quas quo quam
+          obcaecati ducimus totam quia sint, et nobis nisi tenetur id
+          aspernatur quibusdam molestiae reprehenderit sed incidunt. Voluptas
+          error necessitatibus sed inventore, quasi facilis, est. Asperiores
+          atque laboriosam inventore quis eos nulla. Fuga neque odit maiores
+          facilis voluptas nemo numquam, eos amet molestias.
+        </p>
       </div>
-    </div> 
-  </div>
+    </div>
+ </div>
 </template>
 
-<script>
- import { ref } from 'vue';
-// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-// import { library } from '@fortawesome/fontawesome-svg-core';
-// import { faFacebook, faTwitter, faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
+<script setup>
+import { ref, computed } from 'vue';
 
-// library.add(faFacebook, faTwitter, faLinkedin, faInstagram);
-
-export default {
-  setup() {
-    // 使用ref创建响应式数据
-    const books = ref([
-      { title: 'Book 1', exerpt: 'Lorem ipsum dolor sit amet...', isExpanded: false },
-      { title: 'Book 2', exerpt: 'Sed ut perspiciatis unde...', isExpanded: false },
-      { title: 'Book 3', exerpt: 'At vero eos et accusamus...', isExpanded: false },
-      { title: 'Book 4', exerpt: 'Nemo enim ipsam...', isExpanded: false }
-    ]);
-
+const books = ref([
+  { title: 'Book 1', exerpt: 'Lorem ipsum dolor sit amet...', isExpanded: false },
+  { title: 'Book 2', exerpt: 'Sed ut perspiciatis unde...', isExpanded: false },
+  { title: 'Book 3', exerpt: 'At vero eos et accusamus...', isExpanded: false },
+  { title: 'Book 4', exerpt: 'Nemo enim ipsam...', isExpanded: false }
+]);
 const expandedIndex = ref(null); // 当前展开的卡片索引
-// 切换卡片状态的方法
-// 切换卡片状态的方法
-const toggleBook = index => {
-       // 如果当前点击的卡片已经是展开状态，则关闭它，否则展开并隐藏其他卡片
-       if (expandedIndex.value === index) {
-        expandedIndex.value = null;
-      } else {
-        expandedIndex.value = index;
-      }
-    };
+const showAllCards = ref(true); // 控制是否显示所有卡片
 
-    // 将响应式数据和方法暴露给模板
-    return {
-      books,
-      toggleBook,
-      expandedIndex
-    };
+// 使用计算属性决定是否添加 'wrapper--expanded' 类
+const isWrapperExpanded = computed(() => expandedIndex.value !== null);
+const wrapperClasses = computed(() => ['wrapper', isWrapperExpanded.value ? 'wrapper--expanded' : '']);
+
+const toggleBook = index => {
+  if (expandedIndex.value === index) {
+    expandedIndex.value = null;
+    showAllCards.value = true;
+  } else {
+    expandedIndex.value = index;
+    showAllCards.value = false;
   }
 };
+
+// 无需返回，因为 script setup 会自动暴露所有顶级的响应式引用和函数
 </script>
 
 <style>
@@ -108,10 +143,17 @@ const toggleBook = index => {
   line-height: 28px;
 }
 .wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
   height: 100vh;
+  width: 100vw;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
+}
+.wrapper--expanded {
+  z-index: 1000; /* 或者你想要的任何 z-index 值 */
 }
 .book__cover-exerpt {
   color: #6a6a6a;
@@ -145,7 +187,6 @@ const toggleBook = index => {
   margin-bottom: 2.5rem;
 }
 .book {
-
   overflow: hidden;
   background: white;
   width: 240px;
@@ -153,7 +194,7 @@ const toggleBook = index => {
   box-shadow: 0 20px 30px -10px #ccc;
   transition: all 0.5s ease-in-out;
   margin: 0 10px;
-  margin-top: 20px;
+  margin-top: 250px;
 }
 .book:hover {
   box-shadow: 0 6px 50px 10px #cfcfcf;
@@ -162,6 +203,8 @@ const toggleBook = index => {
   height: 100%;
   width: 100%;
   overflow-y: scroll;
+  z-index: 100;
+  margin: 0;
 }
 .book--expanded .overlay {
   opacity: 0.95;
@@ -227,5 +270,8 @@ span .fa {
   max-height: 0;
   padding: 0rem;
 }
-
+html.no-scroll,
+body.no-scroll {
+  overflow: hidden;
+}
 </style>
