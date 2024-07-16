@@ -8,8 +8,7 @@
       <main class="flex-1 ">
         <SearchBox />
         <!-- <CardEffects />Content -->
-        <FullCard />
-        cointain
+        <!-- <FullCard /> -->
       </main>
       <nav class="order-first w-60 ">Navigation</nav>
       <aside class="w-32 p-4">Side-搜索记录</aside>
@@ -20,8 +19,10 @@
         <SlideOver trigger="button" />
       </div>
     </div>
-    <footer class=" p-4 h-10">
-      <Footer />
+    
+    <footer class=" bg-blue-200 h-10">
+      <!-- <Footer /> -->
+        <FooterBox />
     </footer>
     
   </div>
@@ -35,6 +36,7 @@ import LogoGroup from '@/components/home/LogoGroup.vue';
 import SearchBox from '@/components/home/SearchBox.vue';
 import CardEffects from '../components/home/card/CardEffects.vue'
 import FullCard from '@/components/home/card/FullCard.vue';
+import FooterBox from '@/components/home/Footerbox/FooterBox.vue';
 </script>
 <style lang="css" scoped>
 @tailwind base;

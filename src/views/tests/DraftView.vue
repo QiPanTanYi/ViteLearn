@@ -11,7 +11,7 @@
                 <!-- <SearchBox /> -->
                 <Test />
                 <!-- <CardEffects /> -->
-                <FullCardtwo />
+                <!-- <FullCardtwo /> -->
 
             </main>
  
@@ -23,8 +23,9 @@
                 <SlideOver trigger="button" />
             </div>
         </div>
-        <footer class="bg-blue-200 p-4 h-10">
-            <Footer />
+        <footer class="bg-blue-200  h-10">
+            <!-- <Footer /> -->
+             <FooterBox2 />
         </footer>
     </div>
 </template>
@@ -39,6 +40,7 @@ import SearchBox from '@/components/home/SearchBox.vue';
 import Test from '@/components/home/Test.vue';
 import CardEffects from '@/components/home/card/CardEffects.vue';
 import FullCardtwo from '@/components/home/card/FullCardtwo.vue';
+import FooterBox2 from '@/components/home/FooterBox/FooterBox2.vue';
 </script>
 
 <style lang="css" scoped>

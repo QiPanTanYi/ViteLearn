@@ -187,6 +187,7 @@ const toggleBook = index => {
   margin-bottom: 2.5rem;
 }
 .book {
+  
   overflow: hidden;
   background: white;
   width: 240px;
